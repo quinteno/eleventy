@@ -93,6 +93,7 @@ class Serverless {
 
   getContentMap() {
     let fullPath = TemplatePath.absolutePath(this.dir, this.mapFilename);
+    console.log(fullPath);
     debug(
       `Including content map (maps output URLs to input files) from ${fullPath}`
     );
