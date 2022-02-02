@@ -76,12 +76,13 @@ class Serverless {
     let dir = path.join(this.options.functionsDir, this.name);
     let paths = [
       path.join(TemplatePath.getWorkingDir(), dir), // netlify dev
-      path.join("/var/task/", dir), // AWS Lambda absolute path
+      path.join("/var/task/src", dir), // AWS Lambda absolute path
       path.join(TemplatePath.getWorkingDir()), // after the chdir below
     ];
 
     for (let path of paths) {
       if (fs.existsSync(path)) {
+        console.log(path);
         return path;
       }
     }
@@ -93,7 +94,7 @@ class Serverless {
 
   getContentMap() {
     let fullPath = TemplatePath.absolutePath(this.dir, this.mapFilename);
-    console.log('content map:' ,fullPath);
+    console.log('content map:', fullPath);
     debug(
       `Including content map (maps output URLs to input files) from ${fullPath}`
     );
