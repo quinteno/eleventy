@@ -76,13 +76,13 @@ class Serverless {
     let dir = path.join(this.options.functionsDir, this.name);
     let paths = [
       path.join(TemplatePath.getWorkingDir(), dir), // netlify dev
-      path.join("/var/task/src/", dir), // AWS Lambda absolute path
+      path.join("/var/task/src", dir), // AWS Lambda absolute path
       path.join(TemplatePath.getWorkingDir()), // after the chdir below
     ];
 
     for (let path of paths) {
       if (fs.existsSync(path)) {
-        console.log(path);
+        fs.readdirSync(path).forEach(file => console.log(file))
         return path;
       }
     }
